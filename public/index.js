@@ -6,5 +6,19 @@ function addPost(description, title) {
 }
 
 $('#add-post').on('click', function() {
-    addPost('teste')
+    $('#edit-post').css('visibility', 'visible')
+})
+
+$('#post-form').on('submit', function() {
+    data = $(this).serialize()
+    $.ajax({
+        data: data,
+        method: 'POST',
+        url: 'postit',
+        dataType: 'json',
+        success: function(data) {
+            console.log(data)
+        }
+    })
+    return false
 })
