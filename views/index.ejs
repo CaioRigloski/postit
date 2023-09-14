@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Post it</title>
-    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-    <script src="/index.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" defer></script>
+    <script src="/scripts/index.js" defer></script>
+    <script type="module" src="/scripts/dynamic.js"></script>
     <link rel="stylesheet" href="/stylesheets/index.css">
 </head>
 <body>
@@ -16,13 +17,17 @@
     <div id="edit-post">
         <div>
             <form action="" id="post-form" method="">
+                <button type="button" id="close-edit-post">X</button>
                 <label for="title">Título:</label>
                 <input name="title" type="text" maxlength="45" form="post-form" placeholder="Digite o título aqui...">
                 <label for="description">Descrição:</label>
                 <textarea name="description" maxlength="250" form="post-form" rows="20" placeholder="Sua descrição aqui..." ></textarea>
-                <input type="submit">
+                <input id="post-form-button" type="submit">
             </form>
         </div>
+    </div>
+    <div class="message">
+        <p></p>
     </div>
 </body>
 </html>

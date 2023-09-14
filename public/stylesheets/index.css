@@ -15,7 +15,7 @@ body {
     padding: 5rem;
 }
 
-.postit {
+.postit > div {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -26,8 +26,17 @@ body {
     background-image: url('/images/postit.png');
     background-repeat: no-repeat;
     background-position: center;
-    background-size: contain;
+    background-size: 100% 100%;
     font-family: cursive;
+    cursor: pointer;
+}
+
+.delete-button {
+    background-color: white;
+    font-family: cursive;
+    border: 0.1em solid black;
+    border-radius: 0.5em;
+    cursor: pointer;
 }
 
 .title {
@@ -59,10 +68,15 @@ body {
 }
 
 #edit-post {
-    visibility: hidden;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
     & > div {
         box-sizing: border-box;
         background-color: #ffc501;
@@ -75,8 +89,6 @@ body {
         box-shadow: 1em 1em rgba(0, 0, 0, 0.5);
     }
 }
-
-
 
 #post-form {
     display: flex;
@@ -96,4 +108,24 @@ body {
     & > textarea {
         resize: none;
     }
+    & > #close-edit-post {
+        align-self: flex-end;
+        width: 2em;
+        height: 2em;
+    }
 }
+
+.message {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    width: 100vw;
+    height: 10vh;
+    top: 85%;
+    left: 0;
+    margin: 0;
+    visibility: hidden;
+    background-color: white;
+}   

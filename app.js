@@ -1,9 +1,10 @@
 const express = require('express')
 const bodyParser = require('body-parser');
-const { insertPost } = require('./src/controllers/queries');
+const { insertPost, deletePost, readPosts, updatePost } = require('./src/controllers/queries');
 
 const app = express()
 const port = 3000
+app.listen(port, console.log(`Servidor iniciado na porta ${port}`))
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -20,8 +21,35 @@ app.get('/', (req, res) => {
 })
 
 app.route('/postit')
-    .post( (req, res) => {
-        insertPost(req.body.description, req.body.title)
+    .get((req, res) => {
+        readPosts().then(data => {
+            res.status(200).json(data[0])
+        }).catch((err) => {
+            res.status(400).json({'response': 'Erro. Não foi possível consultar os dados.'})
+        })
+    })
+    
+    .post((req, res) => {
+        insertPost(req.body.description, req.body.title).then((data) => {
+            // return ID of SQL insert to append the postit dynamically.
+            res.status(200).json({'response': 'Dados gravados com sucesso!', 'id': data[0].insertId})
+        }).catch((err) => {
+            res.status(400).json({'response': 'Erro. Não foi possível gravar os dados.'})
+        })
     })
 
-app.listen(port, console.log(`Servidor iniciado na porta ${port}`))
+    .put((req, res) => {
+        updatePost(req.body.description, req.body.title, req.body.id).then((data) => {
+            res.status(200).json({'response': 'Dados alterados com sucesso!'})
+        }).catch((err) => {
+            res.status(400).json({'response': 'Erro. Não foi possível alterar os dados.'})
+        })
+    })
+
+    .delete((req, res) => {
+        deletePost(req.body.id).then(data => {
+            res.status(200).json({'response': 'Dados excluídos com sucesso!'})
+        }).catch((err) => {
+            res.status(400).json({'response': 'Erro. Não foi possível excluir os dados.'})
+        })
+    })

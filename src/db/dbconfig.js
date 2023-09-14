@@ -6,12 +6,12 @@ var con = mysql.createConnection({
   password: "password",
   multipleStatements: true,
   database: "postit"
-});
+})
 
-con.connect(function(err) {
+con.connect( (err) => {
   if (err) throw err;
-  console.log("Conectado!");
-});
+  console.log("Conectado!")
+})
 
 
 module.exports = con
